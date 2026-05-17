@@ -1,0 +1,27 @@
+{
+  "name": "Break Free Tribe",
+  "short_name": "Break Free",
+  "description": "Books, Teachings, Courses and Programs by Apostle Oluwaseun Israel",
+  "start_url": "/Break-Free-App/",
+  "scope": "/Break-Free-App/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0a0a",
+  "theme_color": "#c9a84c",
+  "categories": ["education", "lifestyle"],
+  "lang": "en",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
