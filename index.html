@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<meta name="theme-color" content="#c9a84c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Break Free Tribe">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Break Free Tribe">
+<meta property="og:title" content="Break Free Tribe">
+<meta property="og:description" content="Books, Teachings, Courses and Programs by Apostle Oluwaseun Israel">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://oluwaseunisrael3-boop.github.io/Break-Free-App/">
+<link rel="manifest" href="manifest.json">
+<title>Break Free Tribe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-dark: #0d0d0d;
+    --bg-card: #141414;
+    --bg-input: #1a1a1a;
+    --gold: #c9a84c;
+    --gold-dim: #9e8133;
+    --text-light: #f5f5f7;
+    --text-dim: #a1a1a6;
+    --cream: #f4efe6;
+    --border: #262626;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 75px;
+  }
+  h1, h2, h3, h4 { font-family: 'Cinzel', serif; letter-spacing: 1px; color: var(--cream); }
+  
+  header {
+    background: linear-gradient(180deg, rgba(20,20,20,0.95) 0%, rgba(13,13,13,0.9) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    position: fixed;
+    top: 0; width: 100%; z-index: 100;
+    padding: 12px 16px;
+    display: flex; justify-content: space-between; align-items: center;
+    height: 60px;
+  }
+  .header-title { font-size: 1.1rem; font-weight: 700; color: var(--gold); }
+  .admin-trigger { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; cursor: pointer; letter-spacing: 1px; border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px; }
+  
+  .app-container { max-width: 600px; margin: 60px auto 0 auto; padding: 16px; min-height: calc(100vh - 135px); }
+  .view-section { display: none; }
+  .view-section.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+  .featured-container { position: relative; margin-bottom: 24px; width: 100%; overflow: hidden; border-radius: 12px; }
+  .featured-track { display: flex; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
+  .featured-slide { min-width: 100%; width: 100%; position: relative; aspect-ratio: 16/9; background-size: cover; background-position: center; border-radius: 12px; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; box-sizing: border-box; }
+  .featured-slide::after { content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(13,13,13,0.95) 0%, rgba(13,13,13,0.4) 60%, transparent 100%); border-radius: 12px; z-index: 1; }
+  .featured-slide * { z-index: 2; position: relative; }
+  .featured-tag { align-self: flex-start; background: var(--gold); color: #000; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; padding: 2px 6px; border-radius: 3px; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; }
+  .featured-slide h3 { font-size: 1.2rem; margin-bottom: 4px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+  .featured-slide p { font-size: 0.8rem; color: var(--text-dim); }
+  .slider-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+  .slider-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); transition: all 0.3s; }
+  .slider-dot.active { background: var(--gold); width: 18px; border-radius: 3px; }
+
+  .section-title { font-size: 1.1rem; margin: 20px 0 12px 0; border-left: 3px solid var(--gold); padding-left: 8px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+  
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; position: relative; transition: transform 0.2s, border-color 0.2s; cursor: pointer; }
+  .card:active { transform: scale(0.98); }
+  .card-img { width: 100%; aspect-ratio: 1/1; border-radius: 8px; background-size: cover; background-position: center; margin-bottom: 10px; background-color: #222; }
+  .card-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; line-height: 1.3; color: var(--cream); overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+  .card-meta { font-size: 0.75rem; color: var(--gold); font-weight: 500; }
+  
+  .list-item { display: flex; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 10px; margin-bottom: 10px; cursor: pointer; }
+  .list-thumb { width: 50px; height: 50px; border-radius: 6px; background-size: cover; background-position: center; margin-right: 12px; flex-shrink: 0; background-color: #222; }
+  .list-content { flex-grow: 1; min-width: 0; }
+  .list-title { font-size: 0.85rem; font-weight: 600; margin-bottom: 2px; color: var(--cream); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .list-desc { font-size: 0.75rem; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  
+  .player-drawer { position: fixed; bottom: -100vh; left: 0; width: 100%; height: 100vh; background: var(--bg-dark); z-index: 2000; transition: bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; }
+  .player-drawer.active { bottom: 0; }
+  .player-header { height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 1px solid var(--border); }
+  .player-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; }
+  .player-art { width: 75%; aspect-ratio: 1/1; border-radius: 16px; background-size: cover; background-position: center; box-shadow: 0 10px 3px rgba(0,0,0,0.5); margin-bottom: 30px; border: 1px solid var(--border); }
+  .player-track-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 6px; color: var(--cream); }
+  .player-track-author { font-size: 0.9rem; color: var(--gold); margin-bottom: 30px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; }
+  .progress-container { width: 100%; margin-bottom: 20px; }
+  .progress-bar { width: 100%; height: 4px; background: var(--border); border-radius: 2px; position: relative; cursor: pointer; }
+  .progress-fill { height: 100%; background: var(--gold); width: 0%; border-radius: 2px; }
+  .time-info { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-dim); margin-top: 6px; }
+  .player-controls { display: flex; align-items: center; gap: 32px; margin-bottom: 40px; }
+  .play-btn { width: 64px; height: 64px; border-radius: 50%; background: var(--gold); color: #000; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; border: none; }
+  .side-btn { background: none; border: none; color: var(--text-light); font-size: 1.2rem; cursor: pointer; }
+  
+  .nav-bar { position: fixed; bottom: 0; left: 0; width: 100%; height: 64px; background: rgba(20,20,20,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid var(--border); display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
+  .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-dim); text-decoration: none; font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; width: 20%; height: 100%; cursor: pointer; gap: 4px; }
+  .nav-item svg { width: 20px; height: 20px; fill: currentColor; transition: transform 0.2s; }
+  .nav-item.active { color: var(--gold); font-weight: 600; }
+  .nav-item.active svg { transform: translateY(-2px); }
+
+  .community-input-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 16px; }
+  .com-textarea { width: 100%; background: var(--bg-input); border: 1px solid var(--border); border-radius: 8px; padding: 10px; color: var(--text-light); font-family: inherit; font-size: 0.85rem; resize: none; height: 70px; margin-bottom: 8px; }
+  .com-textarea:focus { outline: 1px solid var(--gold); }
+  .com-meta-row { display: flex; justify-content: space-between; align-items: center; }
+  .com-input-name { background: var(--bg-input); border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; color: var(--text-light); font-size: 0.8rem; width: 50%; }
+  .com-input-name:focus { outline: 1px solid var(--gold); }
+  .btn-gold { background: var(--gold); color: #000; font-weight: 600; font-size: 0.8rem; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; }
+  
+  .comment-node { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+  .comment-header { display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 6px; }
+  .comment-author { font-weight: 600; color: var(--cream); }
+  .comment-time { color: var(--text-dim); }
+  .comment-body { font-size: 0.85rem; line-height: 1.4; color: var(--text-light); margin-bottom: 10px; white-space: pre-wrap; }
+  .comment-actions { display: flex; gap: 14px; font-size: 0.75rem; color: var(--text-dim); }
+  .action-trigger { cursor: pointer; display: flex; align-items: center; gap: 4px; background: none; border: none; color: inherit; font-size: inherit; }
+  .action-trigger.liked { color: var(--gold); font-weight: bold; }
+
+  .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 3000; display: none; align-items: center; justify-content: center; padding: 16px; }
+  .modal-overlay.active { display: flex; }
+  .modal-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; width: 100%; max-width: 450px; padding: 20px; max-height: 85vh; overflow-y: auto; position: relative; }
+  .modal-close { position: absolute; top: 14px; right: 16px; font-size: 1.2rem; color: var(--text-dim); cursor: pointer; background: none; border: none; }
+  
+  .admin-panel { display: none; background: #111; border: 2px dashed var(--gold); border-radius: 12px; padding: 16px; margin-bottom: 24px; }
+  .admin-panel.active { display: block; }
+  .form-group { margin-bottom: 12px; }
+  .form-group label { display: block; font-size: 0.75rem; color: var(--text-dim); margin-bottom: 4px; text-transform: uppercase; }
+  .form-control { width: 100%; background: #1a1a1a; border: 1px solid var(--border); padding: 8px; color: #fff; border-radius: 6px; font-family: inherit; font-size: 0.85rem; }
+  .form-control:focus { outline: 1px solid var(--gold); }
+  
+  .bible-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+  .bible-day-btn { background: var(--bg-card); border: 1px solid var(--border); padding: 10px 4px; border-radius: 8px; text-align: center; cursor: pointer; font-size: 0.75rem; }
+  .bible-day-btn.completed { border-color: var(--gold-dim); background: rgba(201, 168, 76, 0.05); }
+  .bible-day-btn.active { background: var(--gold); color: #000; font-weight: 600; }
+  
+  .bible-detail-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-top: 12px; }
+  .bible-detail-title { font-size: 1rem; color: var(--gold); margin-bottom: 8px; font-family: 'Cinzel', serif; }
+  .bible-detail-passage { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; line-height: 1.5; color: var(--cream); margin-bottom: 16px; }
+  .bible-actions { display: flex; gap: 10px; }
+  .btn-outline { background: none; border: 1px solid var(--border); color: var(--text-light); padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; flex: 1; text-align: center; }
+  .btn-outline.completed { background: rgba(201,168,76,0.1); border-color: var(--gold); color: var(--gold); }
+
+  .search-input { width: 100%; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; color: var(--text-light); font-size: 0.85rem; margin-bottom: 16px; font-family: inherit; }
+  .search-input:focus { outline: 1px solid var(--gold); }
+
+  /* Donation specific layout styling */
+  .donation-card { background: linear-gradient(135deg, #1a1a1a 0%, #141414 100%); border: 1px solid var(--gold-dim); border-radius: 14px; padding: 20px; margin: 16px 0; text-align: center; }
+  .donation-title { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.1rem; margin-bottom: 8px; }
+  .donation-desc { font-size: 0.8rem; color: var(--text-dim); line-height: 1.4; margin-bottom: 16px; }
+  .account-details-box { background: #0d0d0d; border: 1px solid var(--border); border-radius: 8px; padding: 12px; position: relative; margin-bottom: 14px; }
+  .bank-name { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-bottom: 4px; }
+  .account-num { font-size: 1.4rem; font-weight: 700; color: var(--cream); letter-spacing: 2px; margin-bottom: 4px; }
+  .account-holder { font-size: 0.8rem; color: var(--gold); font-weight: 500; }
+  .btn-copy { background: rgba(201, 168, 76, 0.15); color: var(--gold); border: 1px solid var(--gold); border-radius: 6px; padding: 8px 16px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+  .btn-copy:active { transform: scale(0.97); }
+
+  /* Admin program listing style */
+  .admin-prog-item { display: flex; justify-content: space-between; align-items: center; background: #1a1a1a; padding: 8px; border-radius: 6px; margin-bottom: 6px; border: 1px solid var(--border); font-size: 0.8rem; }
+  .btn-danger { background: #b32424; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-title">BREAK FREE TRIBE</div>
+  <div class="admin-trigger" onclick="toggleAdminPanel()">Portal Admin</div>
+</header>
+
+<div class="app-container">
+  
+  <div id="adminPanel" class="admin-panel">
+    <h3 style="font-size:0.9rem; margin-bottom:12px; color:var(--gold);">Content Provisioning Panel</h3>
+    
+    <div class="form-group">
+      <label>Entry Type</label>
+      <select id="admType" class="form-control" onchange="adaptAdminForm()">
+        <option value="featured">Featured Slide (Top Slider)</option>
+        <option value="book">Book Asset</option>
+        <option value="teaching">Teaching (Audio/Video)</option>
+        <option value="course">Course / Program Block</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label>Resource Title</label>
+      <input type="text" id="admTitle" class="form-control" placeholder="e.g. Atmosphere of Freedom">
+    </div>
+    
+    <div class="form-group" id="admDescGroup">
+      <label>Sub-text / Captions / Description</label>
+      <input type="text" id="admDesc" class="form-control" placeholder="Brief contextual summary text">
+    </div>
+    
+    <div class="form-group">
+      <label>Graphic Artwork / Cover URL</label>
+      <input type="text" id="admImage" class="form-control" placeholder="https://domain.com/image.jpg">
+    </div>
+    
+    <div class="form-group" id="admMediaGroup">
+      <label>Media Source Link (Audio URL or YouTube / Course URL)</label>
+      <input type="text" id="admMedia" class="form-control" placeholder="https://domain.com/audio.mp3 or YouTube URL">
+    </div>
+
+    <div class="form-group" id="admPriceGroup" style="display:none;">
+      <label>Access Status / Price Tag</label>
+      <input type="text" id="admPrice" class="form-control" placeholder="e.g. Free or N5,000">
+    </div>
+    
+    <button class="btn-gold" style="width:100%; margin-top:8px; padding:10px;" onclick="saveAdminEntry()">Commit Item Entry</button>
+
+    <div id="adminFeaturedManageSection" style="margin-top: 18px; border-top: 1px dashed var(--border); padding-top: 12px;">
+      <h4 style="font-size:0.8rem; color:var(--gold); margin-bottom:8px;">Manage Active Featured Slider Programs</h4>
+      <div id="adminFeaturedList"></div>
+    </div>
+  </div>
+
+  <div id="view-home" class="view-section active">
+    <div class="featured-container">
+      <div class="featured-track" id="featuredTrack">
+        </div>
+      <div class="slider-dots" id="sliderDots">
+        </div>
+    </div>
+    
+    <div class="section-title">Foundational Courses &amp; Programs</div>
+    <div class="grid-2" id="homeCourses">
+      </div>
+    
+    <div class="section-title">Latest Apostolic Teachings</div>
+    <div id="homeTeachings">
+      </div>
+  </div>
+
+  <div id="view-bible" class="view-section">
+    <h2 class="section-title" style="margin-top:0;">365-Day Apostolic Reading Plan</h2>
+    <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:16px;">Systematic daily reading plan to feed your spirit. Track your progress daily.</p>
+    
+    <div class="bible-grid" id="bibleDaysGrid">
+      </div>
+    
+    <div id="bibleReadingDisplay">
+      </div>
+  </div>
+
+  <div id="view-books" class="view-section">
+    <h2 class="section-title" style="margin-top:0;">Apostolic Library &amp; Publications</h2>
+    <input type="text" class="search-input" id="bookSearch" placeholder="Search available literature..." oninput="renderBooks()">
+    <div class="grid-2" id="booksGrid">
+      </div>
+  </div>
+
+  <div id="view-community" class="view-section">
+    <h2 class="section-title" style="margin-top:0;">Tribe Fellowship Feed</h2>
+    
+    <div class="community-input-box">
+      <textarea class="com-textarea" id="comMessage" placeholder="Share a testimony, insight, or prayer request with the Tribe..."></textarea>
+      <div class="com-meta-row">
+        <input type="text" class="com-input-name" id="comName" placeholder="Your Name">
+        <button class="btn-gold" onclick="submitComment()">Post to Feed</button>
+      </div>
+    </div>
+    
+    <div id="communityFeedContainer">
+      </div>
+  </div>
+
+  <div id="view-more" class="view-section">
+    <h2 class="section-title" style="margin-top:0;">Ministry Resources</h2>
+    
+    <div class="donation-card">
+      <div class="donation-title">Donation &amp; Prophetic Seed</div>
+      <div class="donation-desc">Partner with the ministry, support the expansion of the gospel, or sow your prophetic seeds directly via bank transfer.</div>
+      <div class="account-details-box">
+        <div class="bank-name">Guaranty Trust Bank</div>
+        <div class="account-num" id="ministryAccountNum">0132038855</div>
+        <div class="account-holder">OLUWASEUN SAMUEL ISRAEL</div>
+      </div>
+      <button class="btn-copy" onclick="copyAccountDetails(this)">
+        <svg style="width:16px;height:16px;fill:currentColor;" viewBox="0 0 24 24"><path d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"/></svg>
+        <span>Copy Account Number</span>
+      </button>
+    </div>
+
+    <div class="card" style="margin-bottom:12px; display:flex; align-items:center; gap:12px;" onclick="alert('Break Free Tribe App\nVersion 2.1\nDesigned for complete spiritual edification.')">
+      <div style="background:var(--border); width:40px; height:40px; border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--gold);">ℹ️</div>
+      <div>
+        <div style="font-size:0.85rem; font-weight:600; color:var(--cream);">App Ecosystem Information</div>
+        <div style="font-size:0.75rem; color:var(--text-dim);">System parameters &amp; built variant profile</div>
+      </div>
+    </div>
+    
+    <div class="card" style="display:flex; align-items:center; gap:12px;" onclick="window.open('https://oluwaseunisrael3-boop.github.io/Break-Free-App/', '_blank')">
+      <div style="background:var(--border); width:40px; height:40px; border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--gold);">🌐</div>
+      <div>
+        <div style="font-size:0.85rem; font-weight:600; color:var(--cream);">Official Cloud Portal</div>
+        <div style="font-size:0.75rem; color:var(--text-dim);">Access core server platform sync points</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="player-drawer" id="globalPlayer">
+  <div class="player-header">
+    <button class="side-btn" onclick="minimizePlayer()">✕ Close Player</button>
+    <div style="font-size:0.75rem; letter-spacing:1px; color:var(--gold); font-weight:600; text-transform:uppercase;">Apostolic Broadcast Player</div>
+    <div style="width:40px;"></div>
+  </div>
+  <div class="player-body">
+    <div class="player-art" id="playerArt"></div>
+    <div class="player-track-title" id="playerTitle">Select a Teaching</div>
+    <div class="player-track-author" id="playerAuthor">Apostle Oluwaseun Israel</div>
+    
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar" onclick="seekAudio(event)">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="time-info">
+        <span id="timeCurrent">0:00</span>
+        <span id="timeTotal">0:00</span>
+      </div>
+    </div>
+    
+    <div class="player-controls">
+      <button class="side-btn" onclick="skipAudio(-10)">-10s</button>
+      <button class="play-btn" id="playerPlayTrigger" onclick="toggleAudioPlayback()">▶</button>
+      <button class="side-btn" onclick="skipAudio(10)">+10s</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="detailModal">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeDetailModal()">✕</button>
+    <div id="modalDynamicContent"></div>
+  </div>
+</div>
+
+<nav class="nav-bar">
+  <div class="nav-item active" id="nav-home" onclick="switchView('home')">
+    <svg viewBox="0 0 24 24"><path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"/></svg>
+    Home
+  </div>
+  <nav class="nav-item" id="nav-bible" onclick="switchView('bible')">
+    <svg viewBox="0 0 24 24"><path d="M19,2H5A2,2 0 0,0 3,4V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V4A2,2 0 0,0 19,2M19,20H5V4H7V11L9.5,9.5L12,11V4H19V20Z"/></svg>
+    Word
+  </nav>
+  <nav class="nav-item" id="nav-books" onclick="switchView('books')">
+    <svg viewBox="0 0 24 24"><path d="M12,6.03M19,3H5C3.89,3 3,3.89 3,5V19C3,20.11 3.89,21 5,21H19C20.11,21 21,20.11 21,19V5C21,3.89 20.11,3 19,3M19,19H5V5H19V19M17,17H7V15H17V17M17,13H7V11H17V13M17,9H7V7H17V9Z"/></svg>
+    Books
+  </nav>
+  <nav class="nav-item" id="nav-community" onclick="switchView('community')">
+    <svg viewBox="0 0 24 24"><path d="M12,23A1,1 0 0,1 11,22V19H7A2,2 0 0,1 5,17V7A2,2 0 0,1 7,5H17A2,2 0 0,1 19,7V17A2,2 0 0,1 17,19H14.5L12.5,21.5A1,1 0 0,1 12,23M7,7V17H12V19.5L14.5,17H17V7H7Z"/></svg>
+    Tribe
+  </nav>
+  <nav class="nav-item" id="nav-more" onclick="switchView('more')">
+    <svg viewBox="0 0 24 24"><path d="M16,12A2,2 0 1,1 14,10A2,2 0 0,1 16,12M10,12A2,2 0 1,1 8,10A2,2 0 0,1 10,12M22,12A10,10 0 1,1 12,2A10,10 0 0,1 22,12M18,12A4,4 0 1,0 14,16A4,4 0 0,0 18,12Z"/></svg>
+    More
+  </nav>
+</nav>
+
+<script>
+// Mock static fallback structured array for the systematic bible layout reading program
+var bibleplan = [];
+(function(){
+  var books = ["Genesis","Exodus","Leviticus","Numbers","Deuteronomy","Joshua","Judges","Ruth","1 Samuel","2 Samuel","1 Kings","2 Kings","1 Chronicles","2 Chronicles","Ezra","Nehemiah","Esther","Job","Psalms","Proverbs","Ecclesiastes","Song of Solomon","Isaiah","Jeremiah","Lamentations","Ezekiel","Daniel","Hosea","Joel","Amos","Obadiah","Jonah","Micah","Nahum","Habakkuk","Zephaniah","Haggai","Zechariah","Malachi","Matthew","Mark","Luke","John","Acts","Romans","1 Corinthians","2 Corinthians","Galatians","Ephesians","Philippians","Colossians","1 Thessalonians","2 Thessalonians","1 Timothy","2 Timothy","Titus","Philemon","Hebrews","James","1 Peter","2 Peter","1 John","2 John","3 John","Jude","Revelation"];
+  for(var i=0; i<365; i++){
+    var bk = books[i % books.length];
+    var chStart = Math.floor(i / books.length)*3 + 1;
+    bibleplan.push(["Day "+(i+1), bk+" "+chStart+"-"+(chStart+2)]);
+  }
+})();
+
+// Data store instantiation with fallback structural mock data sets
+var defaultFeatured = [
+  { id:"f1", title:"School of Discipline &amp; Power", desc:"Register today for the next intensive developmental spiritual block.", tag:"Special Program", image:"https://images.unsplash.com/photo-1507692049790-de58290a4334?auto=format&fit=crop&w=800&q=80" },
+  { id:"f2", title:"Atmosphere of Total Freedom", desc:"Join Apostle Oluwaseun Israel this Friday at the main Tabernacle arena.", tag:"Prophetic Gathering", image:"https://images.unsplash.com/photo-1510531704581-5b2870972060?auto=format&fit=crop&w=800&q=80" }
+];
+
+var defaultBooks = [
+  { id:"b1", title:"Breaking the Gates of Limitations", desc:"A foundational text containing specific strategies to master environmental setups.", price:"N3,500", image:"https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" },
+  { id:"b2", title:"The Protocol of Prophetic Alignment", desc:"Walk accurately in structural divine assignment patterns.", price:"Free Booklet", image:"https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80" }
+];
+
+var defaultTeachings = [
+  { id:"t1", title:"Uprooting Foundational Strongholds", desc:"Deep exposition regarding systematic legal clearing protocols.", duration:"45:12", url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", image:"https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=400&q=80" },
+  { id:"t2", title:"Commanding the Deliverance Portals", desc:"Sermon capturing precision operations inside prophetic declarations.", duration:"58:40", url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", image:"https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80" }
+];
+
+var defaultCourses = [
+  { id:"c1", title:"Conquering Strategic System Blocks", desc:"6-Week mentorship course outlining advanced programmatic freedom layout formulas.", price:"Enrolled", image:"https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=400&q=80", url:"https://youtube.com" },
+  { id:"c2", title:"Prophetic Intercession Cohort", desc:"Development school strictly curated for tactical modern warfare watchmen.", price:"N15,000", image:"https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=400&q=80", url:"https://youtube.com" }
+];
+
+var defaultComments = [
+  { id:"co1", name:"Bro. Emmanuel", text:"The teaching on Foundational Strongholds completely broken something open in my line this morning. Glory to God!", timestamp:"2 hours ago", likes: 12 },
+  { id:"co2", name:"Pastor Sis. Ruth", text:"Sowing my prophetic seed into this assembly has built structural preservation for my entire family.", timestamp:"5 hours ago", likes: 24 }
+];
+
+// Initialize local arrays pulling from storage mechanisms if configured
+var featuredData = JSON.parse(localStorage.getItem('bt_featured')) || defaultFeatured;
+var booksData = JSON.parse(localStorage.getItem('bt_books')) || defaultBooks;
+var teachingsData = JSON.parse(localStorage.getItem('bt_teachings')) || defaultTeachings;
+var coursesData = JSON.parse(localStorage.getItem('bt_courses')) || defaultCourses;
+var commentsData = JSON.parse(localStorage.getItem('bt_comments')) || defaultComments;
+var userBibleProgress = JSON.parse(localStorage.getItem('bt_bible_progress')) || [];
+// Persistent liked tracking dictionary map
+var userLikedComments = JSON.parse(localStorage.getItem('bt_liked_comments')) || {};
+
+var currentBibleDay = -1;
+var activeSlideIndex = 0;
+var sliderInterval;
+
+// Global HTML5 Audio Engine instance setup
+var audio = new Audio();
+var trackingActiveItem = null;
+
+window.addEventListener('DOMContentLoaded', function(){
+  initAppEngines();
+  setupAudioListeners();
+});
+
+function initAppEngines() {
+  renderFeaturedSlider();
+  renderCourses();
+  renderTeachings();
+  renderBooks();
+  renderBiblePlanView();
+  renderCommunityFeed();
+  adaptAdminForm();
+  startSliderRotation();
+}
+
+// VIEW ARCHITECTURE ROUTER CONTROLLER
+function switchView(target) {
+  document.querySelectorAll('.view-section').forEach(function(el){ el.classList.remove('active'); });
+  document.querySelectorAll('.nav-item').forEach(function(el){ el.classList.remove('active'); });
+  
+  var activeView = document.getElementById('view-' + target);
+  var activeNav = document.getElementById('nav-' + target);
+  if(activeView) activeView.classList.add('active');
+  if(activeNav) activeNav.classList.add('active');
+  
+  window.scrollTo(0,0);
+}
+
+function toggleAdminPanel() {
+  var panel = document.getElementById('adminPanel');
+  panel.classList.toggle('active');
+  if(panel.classList.contains('active')) {
+    renderAdminFeaturedList();
+  }
+}
+
+function adaptAdminForm() {
+  var type = document.getElementById('admType').value;
+  var descGrp = document.getElementById('admDescGroup');
+  var medGrp = document.getElementById('admMediaGroup');
+  var prcGrp = document.getElementById('admPriceGroup');
+  
+  if(type === 'featured') {
+    descGrp.style.display = 'block';
+    medGrp.style.display = 'none';
+    prcGrp.style.display = 'none';
+  } else if(type === 'book') {
+    descGrp.style.display = 'block';
+    medGrp.style.display = 'none';
+    prcGrp.style.display = 'block';
+  } else if(type === 'teaching') {
+    descGrp.style.display = 'block';
+    medGrp.style.display = 'block';
+    prcGrp.style.display = 'none';
+  } else if(type === 'course') {
+    descGrp.style.display = 'block';
+    medGrp.style.display = 'block';
+    prcGrp.style.display = 'block';
+  }
+}
+
+// PROGRAMMATIC ADMIN INJECTIONS & DELETIONS
+function saveAdminEntry() {
+  var type = document.getElementById('admType').value;
+  var title = document.getElementById('admTitle').value.trim();
+  var desc = document.getElementById('admDesc').value.trim();
+  var img = document.getElementById('admImage').value.trim() || "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80";
+  var media = document.getElementById('admMedia').value.trim();
+  var price = document.getElementById('admPrice').value.trim() || "Free";
+  
+  if(!title) { alert('Please supply a legitimate structural title.'); return; }
+  
+  var newId = 'gen_' + Date.now();
+  
+  if(type === 'featured') {
+    featuredData.push({ id: newId, title: title, desc: desc, tag: "Exclusive", image: img });
+    localStorage.setItem('bt_featured', JSON.stringify(featuredData));
+    renderFeaturedSlider();
+    renderAdminFeaturedList();
+  } else if(type === 'book') {
+    booksData.push({ id: newId, title: title, desc: desc, price: price, image: img });
+    localStorage.setItem('bt_books', JSON.stringify(booksData));
+    renderBooks();
+  } else if(type === 'teaching') {
+    teachingsData.push({ id: newId, title: title, desc: desc, duration: "Audio", url: media, image: img });
+    localStorage.setItem('bt_teachings', JSON.stringify(teachingsData));
+    renderTeachings();
+  } else if(type === 'course') {
+    coursesData.push({ id: newId, title: title, desc: desc, price: price, image: img, url: media });
+    localStorage.setItem('bt_courses', JSON.stringify(coursesData));
+    renderCourses();
+  }
+  
+  // Clear inputs safely
+  document.getElementById('admTitle').value = '';
+  document.getElementById('admDesc').value = '';
+  document.getElementById('admImage').value = '';
+  document.getElementById('admMedia').value = '';
+  document.getElementById('admPrice').value = '';
+  
+  alert('Content catalog updated perfectly.');
+}
+
+// NEW FUNCTION: Renders running featured slider list inside admin for direct removal management
+function renderAdminFeaturedList() {
+  var container = document.getElementById('adminFeaturedList');
+  if(!container) return;
+  container.innerHTML = '';
+  
+  if(featuredData.length === 0) {
+    container.innerHTML = '<div style="font-size:0.75rem;color:var(--text-dim);">No active programs currently inside featured layout slider.</div>';
+    return;
+  }
+  
+  featuredData.forEach(function(item){
+    var wrapper = document.createElement('div');
+    wrapper.className = 'admin-prog-item';
+    
+    var infoSpan = document.createElement('span');
+    infoSpan.style.overflow = 'hidden';
+    infoSpan.style.textOverflow = 'ellipsis';
+    infoSpan.style.whiteSpace = 'nowrap';
+    infoSpan.style.maxWidth = '75%';
+    infoSpan.innerHTML = `<strong>[${item.tag}]</strong> ${item.title}`;
+    
+    var delBtn = document.createElement('button');
+    delBtn.className = 'btn-danger';
+    delBtn.textContent = 'Delete';
+    delBtn.onclick = function() {
+      deleteFeaturedProgram(item.id);
+    };
+    
+    wrapper.appendChild(infoSpan);
+    wrapper.appendChild(delBtn);
+    container.appendChild(wrapper);
+  });
+}
+
+// NEW FUNCTION: Implements structural deletion operation of a specific featured slide block array unit
+function deleteFeaturedProgram(id) {
+  if(confirm("Are you absolutely sure you want to completely delete this featured program from the app layout slider?")) {
+    featuredData = featuredData.filter(function(item) { return item.id !== id; });
+    localStorage.setItem('bt_featured', JSON.stringify(featuredData));
+    
+    // Readjust rotating slide tracker references safely
+    activeSlideIndex = 0;
+    
+    // Re-render interface configurations smoothly
+    renderFeaturedSlider();
+    renderAdminFeaturedList();
+  }
+}
+
+// HOMEPAGE SLIDER ENGINE UI COMPILATIONS
+function renderFeaturedSlider() {
+  var track = document.getElementById('featuredTrack');
+  var dotsContainer = document.getElementById('sliderDots');
+  if(!track) return;
+  
+  track.innerHTML = '';
+  dotsContainer.innerHTML = '';
+  
+  if(featuredData.length === 0) {
+    track.innerHTML = `
+      <div class="featured-slide" style="background-image: linear-gradient(45deg, #111, #222);">
+        <h3>Break Free Tribe Gathering</h3>
+        <p>Apostolic ministry alignments and structural spiritual restoration movements.</p>
+      </div>
+    `;
+    return;
+  }
+  
+  featuredData.forEach(function(item, idx){
+    var slide = document.createElement('div');
+    slide.className = 'featured-slide';
+    slide.style.backgroundImage = "url('" + item.image + "')";
+    
+    var tag = document.createElement('div');
+    tag.className = 'featured-tag';
+    tag.textContent = item.tag;
+    
+    var h3 = document.createElement('h3');
+    h3.innerHTML = item.title;
+    
+    var p = document.createElement('p');
+    p.innerHTML = item.desc;
+    
+    slide.appendChild(tag);
+    slide.appendChild(h3);
+    slide.appendChild(p);
+    track.appendChild(slide);
+    
+    var dot = document.createElement('div');
+    dot.className = 'slider-dot' + (idx === 0 ? ' active' : '');
+    dotsContainer.appendChild(dot);
+  });
+}
+
+function startSliderRotation() {
+  if(sliderInterval) clearInterval(sliderInterval);
+  sliderInterval = setInterval(function(){
+    if(featuredData.length <= 1) return;
+    activeSlideIndex = (activeSlideIndex + 1) % featuredData.length;
+    updateSliderPosition();
+  }, 5000);
+}
+
+function updateSliderPosition() {
+  var track = document.getElementById('featuredTrack');
+  if(!track) return;
+  track.style.transform = "translateX(-" + (activeSlideIndex * 100) + "%)";
+  
+  var dots = document.querySelectorAll('.slider-dot');
+  dots.forEach(function(dot, idx){
+    if(idx === activeSlideIndex) dot.classList.add('active');
+    else dot.classList.remove('active');
+  });
+}
+
+// GRID DISPLAY CORE BUILD IMPLEMENTATIONS
+function renderCourses() {
+  var container = document.getElementById('homeCourses');
+  if(!container) return;
+  container.innerHTML = '';
+  
+  coursesData.forEach(function(item){
+    var card = document.createElement('div');
+    card.className = 'card';
+    card.onclick = function() { openCourseModal(item); };
+    
+    var img = document.createElement('div');
+    img.className = 'card-img';
+    img.style.backgroundImage = "url('" + item.image + "')";
+    
+    var title = document.createElement('div');
+    title.className = 'card-title';
+    title.innerHTML = item.title;
+    
+    var meta = document.createElement('div');
+    meta.className = 'card-meta';
+    meta.textContent = item.price;
+    
+    card.appendChild(img);
+    card.appendChild(title);
+    card.appendChild(meta);
+    container.appendChild(card);
+  });
+}
+
+function renderTeachings() {
+  var container = document.getElementById('homeTeachings');
+  if(!container) return;
+  container.innerHTML = '';
+  
+  teachingsData.forEach(function(item){
+    var row = document.createElement('div');
+    row.className = 'list-item';
+    row.onclick = function() { loadAudioBroadcast(item); };
+    
+    var thumb = document.createElement('div');
+    thumb.className = 'list-thumb';
+    thumb.style.backgroundImage = "url('" + item.image + "')";
+    
+    var body = document.createElement('div');
+    body.className = 'list-content';
+    
+    var title = document.createElement('div');
+    title.className = 'list-title';
+    title.innerHTML = item.title;
+    
+    var desc = document.createElement('div');
+    desc.className = 'list-desc';
+    desc.innerHTML = item.desc;
+    
+    body.appendChild(title);
+    body.appendChild(desc);
+    row.appendChild(thumb);
+    row.appendChild(body);
+    container.appendChild(row);
+  });
+}
+
+function renderBooks() {
+  var container = document.getElementById('booksGrid');
+  if(!container) return;
+  var filter = document.getElementById('bookSearch').value.toLowerCase();
+  container.innerHTML = '';
+  
+  booksData.forEach(function(item){
+    if(filter && !item.title.toLowerCase().includes(filter) && !item.desc.toLowerCase().includes(filter)) return;
+    
+    var card = document.createElement('div');
+    card.className = 'card';
+    card.onclick = function() { openBookModal(item); };
+    
+    var img = document.createElement('div');
+    img.className = 'card-img';
+    img.style.backgroundImage = "url('" + item.image + "')";
+    
+    var title = document.createElement('div');
+    title.className = 'card-title';
+    title.innerHTML = item.title;
+    
+    var meta = document.createElement('div');
+    meta.className = 'card-meta';
+    meta.textContent = item.price;
+    
+    card.appendChild(img);
+    card.appendChild(title);
+    card.appendChild(meta);
+    container.appendChild(card);
+  });
+}
+
+// SYSTEM BIBLE DISCIPLINE RENDER LAYER
+function getDayOfYear() {
+  var now = new Date();
+  var start = new Date(now.getFullYear(), 0, 0);
+  var diff = now - start;
+  var oneDay = 1000 * 60 * 60 * 24;
+  return Math.floor(diff / oneDay) % 365;
+}
+
+function renderBiblePlanView() {
+  var grid = document.getElementById('bibleDaysGrid');
+  if(!grid) return;
+  grid.innerHTML = '';
+  
+  var todayIdx = getDayOfYear();
+  if(currentBibleDay === -1) currentBibleDay = todayIdx;
+  
+  var startSlice = Math.max(0, currentBibleDay - 3);
+  var endSlice = Math.min(364, startSlice + 7);
+  
+  for(var i = startSlice; i <= endSlice; i++){
+    var btn = document.createElement('div');
+    var isCompleted = userBibleProgress.includes(i);
+    btn.className = 'bible-day-btn' + (isCompleted ? ' completed' : '') + (i === currentBibleDay ? ' active' : '');
+    btn.textContent = 'Day ' + (i + 1);
+    
+    var dIdx = i;
+    btn.onclick = (function(idx){
+      return function() { currentBibleDay = idx; renderBiblePlanView(); };
+    })(dIdx);
+    
+    grid.appendChild(btn);
+  }
+  
+  showBibleDay(currentBibleDay);
+}
+
+function showBibleDay(idx) {
+  var container = document.getElementById('bibleReadingDisplay');
+  if(!container) return;
+  container.innerHTML = '';
+  
+  var entry = bibleplan[idx];
+  if(!entry) return;
+  
+  var todayIdx = getDayOfYear();
+  var isToday = (idx === todayIdx);
+  
+  var card = document.createElement('div');
+  card.className = 'bible-detail-card';
+  
+  var title = document.createElement('div');
+  title.className = 'bible-detail-title';
+  title.textContent = entry[0] + (isToday ? ' (Today\'s Assignment)' : '');
+  
+  var passage = document.createElement('div');
+  passage.className = 'bible-detail-passage';
+  passage.textContent = entry[1];
+  
+  var actions = document.createElement('div');
+  actions.className = 'bible-actions';
+  
+  var completeBtn = document.createElement('button');
+  var checkDone = userBibleProgress.includes(idx);
+  completeBtn.className = 'btn-outline' + (checkDone ? ' completed' : '');
+  completeBtn.textContent = checkDone ? '✓ Reading Completed' : 'Mark Completed';
+  completeBtn.onclick = function() { toggleBibleDayProgress(idx); };
+  
+  var shareBtn = document.createElement('button');
+  shareBtn.className = 'btn-outline';
+  shareBtn.textContent = 'Share Text';
+  shareBtn.onclick = function() { shareTodayReading(); };
+  
+  actions.appendChild(completeBtn);
+  actions.appendChild(shareBtn);
+  card.appendChild(title);
+  card.appendChild(passage);
+  card.appendChild(actions);
+  container.appendChild(card);
+}
+
+function toggleBibleDayProgress(idx) {
+  var pIdx = userBibleProgress.indexOf(idx);
+  if(pIdx > -1) userBibleProgress.splice(pIdx, 1);
+  else userBibleProgress.push(idx);
+  
+  localStorage.setItem('bt_bible_progress', JSON.stringify(userBibleProgress));
+  renderBiblePlanView();
+}
+
+function shareTodayReading() {
+  var idx = (currentBibleDay >= 0) ? currentBibleDay : getDayOfYear();
+  idx = Math.max(0, Math.min(364, idx));
+  var entry = bibleplan[idx];
+  if (!entry) return;
+  var isToday = (idx === getDayOfYear());
+  var label = isToday ? "Today's Bible Reading" : 'Bible Reading — ' + entry[0];
+  var text = label + '\n\n📖 ' + entry[1] + '\n\nShared via Break Free Tribe Fellowship app.';
+  if(navigator.share) {
+    navigator.share({ title: 'Break Free Reading', text: text }).catch(function(){});
+  } else {
+    alert('Copied to clipboard for manual sharing:\n\n' + text);
+  }
+}
+
+// SYSTEM APP FELLOWSHIP FEED MECHANISMS (WITH FIXED LIKES STORAGE LOGIC)
+function renderCommunityFeed() {
+  var container = document.getElementById('communityFeedContainer');
+  if(!container) return;
+  container.innerHTML = '';
+  
+  commentsData.forEach(function(item){
+    var node = document.createElement('div');
+    node.className = 'comment-node';
+    
+    var head = document.createElement('div');
+    head.className = 'comment-header';
+    var author = document.createElement('div');
+    author.className = 'comment-author';
+    author.textContent = item.name;
+    var time = document.createElement('div');
+    time.className = 'comment-time';
+    time.textContent = item.timestamp;
+    head.appendChild(author);
+    head.appendChild(time);
+    
+    var body = document.createElement('div');
+    body.className = 'comment-body';
+    body.textContent = item.text;
+    
+    var actions = document.createElement('div');
+    actions.className = 'comment-actions';
+    
+    var likeTrigger = document.createElement('button');
+    // Read the like assignment mapping explicitly from the persistent storage mechanism array
+    var hasLiked = !!userLikedComments[item.id];
+    likeTrigger.className = 'action-trigger' + (hasLiked ? ' liked' : '');
+    likeTrigger.innerHTML = `❤️ <span>${item.likes}</span>`;
+    
+    likeTrigger.onclick = function() {
+      toggleLikeComment(item.id);
+    };
+    
+    actions.appendChild(likeTrigger);
+    node.appendChild(head);
+    node.appendChild(body);
+    node.appendChild(actions);
+    container.appendChild(node);
+  });
+}
+
+function submitComment() {
+  var msgEl = document.getElementById('comMessage');
+  var nameEl = document.getElementById('comName');
+  var text = msgEl.value.trim();
+  var name = nameEl.value.trim() || "Anonymous Watchman";
+  
+  if(!text) { alert('Type a testimonial insight message before submission.'); return; }
+  
+  var newComment = {
+    id: 'comm_' + Date.now(),
+    name: name,
+    text: text,
+    timestamp: "Just Now",
+    likes: 0
+  };
+  
+  commentsData.unshift(newComment);
+  localStorage.setItem('bt_comments', JSON.stringify(commentsData));
+  
+  msgEl.value = '';
+  renderCommunityFeed();
+}
+
+function toggleLikeComment(id) {
+  var comment = commentsData.find(function(c) { return c.id === id; });
+  if(!comment) return;
+  
+  if(userLikedComments[id]) {
+    // Reverse previous layout liking safely
+    delete userLikedComments[id];
+    comment.likes = Math.max(0, comment.likes - 1);
+  } else {
+    // Commit true like state confirmation
+    userLikedComments[id] = true;
+    comment.likes += 1;
+  }
+  
+  // Save both arrays simultaneously to persistent database blocks
+  localStorage.setItem('bt_liked_comments', JSON.stringify(userLikedComments));
+  localStorage.setItem('bt_comments', JSON.stringify(commentsData));
+  
+  // Re-render structural views directly
+  renderCommunityFeed();
+}
+
+// NEW FUNCTION: Implements native copying profile handling for Ministry Bank Details block card
+function copyAccountDetails(btnElement) {
+  var accountNum = document.getElementById('ministryAccountNum').textContent.trim();
+  
+  // Use modern async navigator clipboard APIs if configured securely
+  if(navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(accountNum).then(onCopySuccess).catch(function() {
+      fallbackCopyLogic(accountNum);
+    });
+  } else {
+    fallbackCopyLogic(accountNum);
+  }
+  
+  function onCopySuccess() {
+    var textSpan = btnElement.querySelector('span');
+    var originalText = textSpan.textContent;
+    textSpan.textContent = 'Copied!';
+    btnElement.style.borderColor = 'var(--cream)';
+    btnElement.style.color = 'var(--cream)';
+    
+    setTimeout(function() {
+      textSpan.textContent = originalText;
+      btnElement.style.borderColor = 'var(--gold)';
+      btnElement.style.color = 'var(--gold)';
+    }, 2000);
+  }
+  
+  function fallbackCopyLogic(text) {
+    var textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed"; 
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      onCopySuccess();
+    } catch (err) {
+      alert("Account Details: " + text);
+    }
+    document.body.removeChild(textArea);
+  }
+}
+
+// DYNAMIC INTERACTION MODAL POPUPS WINDOW LAYOUTS
+function openCourseModal(course) {
+  var target = document.getElementById('modalDynamicContent');
+  target.innerHTML = `
+    <div style="background-image:url('${course.image}'); width:100%; aspect-ratio:16/9; background-size:cover; background-position:center; border-radius:8px; margin-bottom:16px;"></div>
+    <h3 style="margin-bottom:6px; color:var(--gold); font-size:1.2rem;">${course.title}</h3>
+    <div style="font-size:0.8rem; color:var(--text-dim); margin-bottom:14px; text-transform:uppercase; font-weight:600;">Status: ${course.price}</div>
+    <p style="font-size:0.9rem; line-height:1.5; color:var(--text-light); margin-bottom:20px;">${course.desc}</p>
+    <button class="btn-gold" style="width:100%; padding:12px;" onclick="window.open('${course.url || 'https://youtube.com'}','_blank')">Enter Lecture Portal Classroom</button>
+  `;
+  document.getElementById('detailModal').classList.add('active');
+}
+
+function openBookModal(book) {
+  var target = document.getElementById('modalDynamicContent');
+  target.innerHTML = `
+    <div style="display:flex; gap:16px; margin-bottom:16px;">
+      <div style="background-image:url('${book.image}'); width:100px; aspect-ratio:1/1; background-size:cover; background-position:center; border-radius:6px; flex-shrink:0; background-color:#222;"></div>
+      <div>
+        <h3 style="color:var(--gold); font-size:1.1rem; margin-bottom:4px;">${book.title}</h3>
+        <div style="font-size:0.8rem; color:var(--text-dim); font-weight:600;">Valuation: ${book.price}</div>
+      </div>
+    </div>
+    <p style="font-size:0.9rem; line-height:1.4; color:var(--text-light); margin-bottom:20px;">${book.desc}</p>
+    <button class="btn-gold" style="width:100%; padding:12px;" onclick="alert('Order routing engine initializes connection point to external bookstore checkout.')">Acquire E-Book Copy</button>
+  `;
+  document.getElementById('detailModal').classList.add('active');
+}
+
+function closeDetailModal() {
+  document.getElementById('detailModal').classList.remove('active');
+}
+
+// FULLY STABILIZED HTML5 CORE AUDIO CONTROLLER DRIVERS
+function setupAudioListeners() {
+  audio.addEventListener('timeupdate', function(){
+    if(!audio.duration) return;
+    var pct = (audio.currentTime / audio.duration) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('timeCurrent').textContent = formatAudioTime(audio.currentTime);
+  });
+  
+  audio.addEventListener('loadedmetadata', function(){
+    document.getElementById('timeTotal').textContent = formatAudioTime(audio.duration);
+  });
+  
+  audio.addEventListener('ended', function(){
+    document.getElementById('playerPlayTrigger').textContent = '▶';
+  });
+}
+
+function loadAudioBroadcast(item) {
+  trackingActiveItem = item;
+  document.getElementById('playerTitle').innerHTML = item.title;
+  document.getElementById('playerArt').style.backgroundImage = "url('" + item.image + "')";
+  
+  audio.src = item.url;
+  audio.play().then(function(){
+    document.getElementById('playerPlayTrigger').textContent = '⏸';
+  }).catch(function(){
+    document.getElementById('playerPlayTrigger').textContent = '▶';
+  });
+  
+  document.getElementById('globalPlayer').classList.add('active');
+}
+
+function toggleAudioPlayback() {
+  if(!audio.src) return;
+  if(audio.paused) {
+    audio.play();
+    document.getElementById('playerPlayTrigger').textContent = '⏸';
+  } else {
+    audio.pause();
+    document.getElementById('playerPlayTrigger').textContent = '▶';
+  }
+}
+
+function skipAudio(seconds) {
+  if(!audio.src) return;
+  audio.currentTime = Math.max(0, Math.min(audio.duration || 0, audio.currentTime + seconds));
+}
+
+function seekAudio(event) {
+  if(!audio.src || !audio.duration) return;
+  var bar = document.getElementById('progressBar');
+  var rect = bar.getBoundingClientRect();
+  var clickX = event.clientX - rect.left;
+  var pct = clickX / rect.width;
+  audio.currentTime = pct * audio.duration;
+}
+
+function minimizePlayer() {
+  document.getElementById('globalPlayer').classList.remove('active');
+}
+
+function formatAudioTime(secs) {
+  if(isNaN(secs)) return "0:00";
+  var m = Math.floor(secs / 60);
+  var s = Math.floor(secs % 60);
+  return m + ":" + (s < 10 ? '0' : '') + s;
+}
+</script>
+
+</body>
+</html>
